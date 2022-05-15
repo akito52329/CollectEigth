@@ -4,18 +4,50 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
-using TMPro;
 using NCMB;
 
 public class StartPanel : MonoBehaviour
 {
     [SerializeField] GameObject[] panels;
     [SerializeField] GameObject[] buttons;
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] int limit = 3;
-    int _panelCount;
+    [SerializeField] Text scoreText;
+    [SerializeField] Text nameText;
+    [SerializeField] int limit = 3;//ハイスコアの読み込む個数
+    int _panelCount;//パネルが何枚目かどうか
+    public int panelCount
+    {
+        get { return _panelCount; }
+        set
+        {
+            if (_panelCount != value)
+            {
+                if (_panelCount >= 0 && _panelCount <= panels.Length - 1)
+                {
+                    panels[_panelCount].SetActive(false);//変更前
+                    _panelCount = value;
+                    panels[_panelCount].SetActive(true);//変更後
+                }
 
+                if (_panelCount == 0)//左矢印のON/OFF
+                {
+                    buttons[0].SetActive(false);
+                }
+                else
+                {
+                    buttons[0].SetActive(true);
+                }
+
+                if (_panelCount == panels.Length - 1)//右矢印のON/OFF
+                {
+                    buttons[1].SetActive(false);
+                }
+                else
+                {
+                    buttons[1].SetActive(true);
+                }
+            }
+        }
+    }
     private void Start()
     {
         Ranking();
@@ -47,40 +79,7 @@ public class StartPanel : MonoBehaviour
         });
     }
 
-    public int panelCount
-    {
-        get { return _panelCount; }
-        set
-        {
-            if (_panelCount != value)
-            {
-                if (_panelCount >= 0 && _panelCount <= panels.Length - 1)
-                {
-                    panels[_panelCount].SetActive(false);//変更前
-                    _panelCount = value;
-                    panels[_panelCount].SetActive(true);//変更後
-                }
-
-                if(_panelCount == 0)//左矢印のON/OFF
-                {
-                    buttons[0].SetActive(false);
-                }
-                else
-                {
-                    buttons[0].SetActive(true);
-                }
-
-                if (_panelCount == panels.Length - 1)//右矢印のON/OFF
-                {
-                    buttons[1].SetActive(false);
-                }
-                else
-                {
-                    buttons[1].SetActive(true);
-                }
-            }
-        }
-    }
+   
 
     public void NextScene()
     {
@@ -97,7 +96,7 @@ public class StartPanel : MonoBehaviour
         rectTransform.DOScale(Vector3.zero, 1f);
     }
 
-    public void ChengePanel(bool chenge)
+    public void ChengePanel(bool chenge)//パネルを変える
     {
         if(chenge)
         {

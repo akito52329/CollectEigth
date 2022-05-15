@@ -44,7 +44,7 @@ public class FinalPanel : MonoBehaviour
     };
 
     [SerializeField] TextMeshProUGUI finalText;
-    [SerializeField] TextMeshProUGUI[] countText;
+    [SerializeField] Text[] countText;
 
     public void CallDisplay()
     {
@@ -64,7 +64,7 @@ public class FinalPanel : MonoBehaviour
         //最終スコア表示
         DOTween.To(() => score, num => score = num, finalScore, scoreTime).SetEase(Ease_Type);
 
-        foreach (TextMeshProUGUI text in countText)
+        foreach (Text text in countText)
         {
             text.gameObject.SetActive(true);
             audioCo.DisplayAudio();
