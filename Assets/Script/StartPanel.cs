@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 using NCMB;
 
 public class StartPanel : MonoBehaviour
 {
     [SerializeField] GameObject[] panels;
     [SerializeField] GameObject[] buttons;
-    [SerializeField] Text scoreText;
-    [SerializeField] Text nameText;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] int limit = 3;//ハイスコアの読み込む個数
     int _panelCount;//パネルが何枚目かどうか
     public int panelCount
@@ -68,7 +69,7 @@ public class StartPanel : MonoBehaviour
         {
             if (e != null)//接続に失敗
             {
-                nameText.text = "なし";
+                nameText.text = "noName";
                 scoreText.text = "0";
             }
             else//接続に成功
