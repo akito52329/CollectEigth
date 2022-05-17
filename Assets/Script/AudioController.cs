@@ -18,7 +18,7 @@ public class AudioController : MonoBehaviour
     {
         if(!on)
         {
-            bgm.Play();
+            bgm.PlayOneShot(bgm.clip);
         }
         else
         {
