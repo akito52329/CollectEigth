@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
@@ -18,22 +18,22 @@ public class BlockGenerator : MonoBehaviour
 
     public string destinationTag = "Block";
 
-    public int GenerationNumber()//¶¬‚·‚éŒÂ”
+    public int GenerationNumber()//ç”Ÿæˆã™ã‚‹å€‹æ•°
     {
         return Random.Range(min, blockGenePos.Length);
     }
 
-    public void GenerationPos()//¶¬êŠ
+    public void GenerationPos()//ç”Ÿæˆå ´æ‰€
     {
         int i = 0;
-        int geneCount = GenerationNumber();//¶¬ŒÂ”
+        int geneCount = GenerationNumber();//ç”Ÿæˆå€‹æ•°
 
         while (i <= geneCount)
         {
             if (geneCount != blockGenePos.Length)
             {
-                var pos = Random.Range(0, blockGenePos.Length);//¶¬ˆÊ’u‚ğŒˆ‚ß‚é
-                if (!generationNumber.Contains(pos))//d•¡‚µ‚Ä‚¢‚È‚¢‚©‚ğ‚İ‚é
+                var pos = Random.Range(0, blockGenePos.Length);//ç”Ÿæˆä½ç½®ã‚’æ±ºã‚ã‚‹
+                if (!generationNumber.Contains(pos))//é‡è¤‡ã—ã¦ã„ãªã„ã‹ã‚’ã¿ã‚‹
                 {
                     generationNumber.Add(pos);
                 }
@@ -44,14 +44,14 @@ public class BlockGenerator : MonoBehaviour
             }
             else
             {
-                generationNumber.Add(i);//‘Sƒ|ƒWƒVƒ‡ƒ“¶¬
+                generationNumber.Add(i);//å…¨ãƒã‚¸ã‚·ãƒ§ãƒ³ç”Ÿæˆ
             }
             i++;
         }
         Generation();
     }
 
-    Color GetColor()//ƒ‰ƒ“ƒ_ƒ€‚ÅF‚ğ“n‚·
+    Color GetColor()//ãƒ©ãƒ³ãƒ€ãƒ ã§è‰²ã‚’æ¸¡ã™
     {
         var num = Random.Range(0, colorDate.Length);
         return colorDate[num];
@@ -62,7 +62,7 @@ public class BlockGenerator : MonoBehaviour
         StartCoroutine("BlockCount");
     }
 
-    IEnumerator BlockCount()//¶¬
+    IEnumerator BlockCount()//ç”Ÿæˆ
     {
         var count = generationNumber.Count;
         while (count-- > 0)

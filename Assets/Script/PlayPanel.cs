@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,15 +10,15 @@ public class PlayPanel : MonoBehaviour
 {
     [SerializeField] AudioController audioCo;
     [SerializeField] GameObject imagePatent;//
-    [SerializeField] GameObject effImage;//ƒNƒŠƒbƒN‚ÌƒGƒtƒFƒNƒg‚Ì‰æ‘œ
+    [SerializeField] GameObject effImage;//ã‚¯ãƒªãƒƒã‚¯æ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ç”»åƒ
     [SerializeField] int defaultScore = 10;
     [SerializeField] float speed = 0.15f;
     int zero = 0;
     int ten = 10;
     [SerializeField] int maxCount = 5;
-    [SerializeField] int[] magniCriteria;//”{—¦Šî€
+    [SerializeField] int[] magniCriteria;//å€ç‡åŸºæº–
     private int _count;
-    public int count//ƒuƒƒbƒN‚ª‰½ŒÂ‚ ‚é‚©
+    public int count//ãƒ–ãƒ­ãƒƒã‚¯ãŒä½•å€‹ã‚ã‚‹ã‹
     {
         get { return _count; }
         set
@@ -50,7 +50,7 @@ public class PlayPanel : MonoBehaviour
         }
 
     }
-    public bool maxClick = false;//Å‘åƒNƒŠƒbƒN‚É’B‚µ‚Ä‚¢‚é‚©
+    public bool maxClick = false;//æœ€å¤§ã‚¯ãƒªãƒƒã‚¯ã«é”ã—ã¦ã„ã‚‹ã‹
 
     [SerializeField] List<Image> colorImage;
     [SerializeField] List<Color> uiColor;
@@ -62,7 +62,7 @@ public class PlayPanel : MonoBehaviour
     {
         if (!maxClick)
         {
-            if (Input.GetKeyDown(KeyCode.Return))//Enter‚ğ‰Ÿ‚µ‚½‚ç
+            if (Input.GetKeyDown(KeyCode.Return))//Enterã‚’æŠ¼ã—ãŸã‚‰
             {
                 Score();
             }
@@ -73,22 +73,22 @@ public class PlayPanel : MonoBehaviour
     {
         maxClick = true;
         Vector3[] curvers = new Vector3[2];
-        curvers[0] = start;//ƒNƒŠƒbƒNˆÊ’u
-        curvers[1] = colorImage[count].transform.localPosition;//Œ‹‰Ê•\¦‚ÌˆÊ’u
+        curvers[0] = start;//ã‚¯ãƒªãƒƒã‚¯ä½ç½®
+        curvers[1] = colorImage[count].transform.localPosition;//çµæœè¡¨ç¤ºã®ä½ç½®
        
-        GameObject eff = Instantiate(effImage, start, effImage.transform.rotation, imagePatent.transform); //ƒGƒtƒFƒNƒg‚ÌƒIƒuƒWƒFƒNƒg‚ğ¶¬
-        eff.GetComponent<Image>().color = color;//F‚ğ•Ï‚¦‚é
-        eff.transform.DOLocalPath(curvers, speed, PathType.Linear ,PathMode.Sidescroller2D)//•ú•¨ü‚ÅˆÚ“®‚³‚¹‚é
+        GameObject eff = Instantiate(effImage, start, effImage.transform.rotation, imagePatent.transform); //ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
+        eff.GetComponent<Image>().color = color;//è‰²ã‚’å¤‰ãˆã‚‹
+        eff.transform.DOLocalPath(curvers, speed, PathType.Linear ,PathMode.Sidescroller2D)//æ”¾ç‰©ç·šã§ç§»å‹•ã•ã›ã‚‹
             .OnComplete(() => { colorImage[count].color = color; count++; Destroy(eff); maxClick = false; }).SetEase(Ease.OutSine);
 
-        uiColor.Add(color);//‰ñû‚µ‚½F‚ğ’Ç‰Á‚·‚é
+        uiColor.Add(color);//å›åã—ãŸè‰²ã‚’è¿½åŠ ã™ã‚‹
 
         
     }
 
-    private void PlusColorCount(Color getColor)//‚»‚ë‚¦‚½‰ñ”‚ğ—^‚¦‚é
+    private void PlusColorCount(Color getColor)//ãã‚ãˆãŸå›æ•°ã‚’ä¸ãˆã‚‹
     {
-       Color[] colorConst = { Color.white, Color.red, Color.blue, Color.green, Color.cyan, Color.magenta, Color.yellow, new Color(72, 72, 72, 255) };//ƒJƒ‰[ƒR[ƒh
+       Color[] colorConst = { Color.white, Color.red, Color.blue, Color.green, Color.cyan, Color.magenta, Color.yellow, new Color(72, 72, 72, 255) };//ã‚«ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰
 
         for(int c = 0; c < colorConst.Length; c++)
         {
@@ -128,7 +128,7 @@ public class PlayPanel : MonoBehaviour
         }
     }
 
-    private int Magnification(int get)//”{—¦‚ğ‚©‚¦‚·
+    private int Magnification(int get)//å€ç‡ã‚’ã‹ãˆã™
     {
         switch(get)
         {
@@ -145,12 +145,12 @@ public class PlayPanel : MonoBehaviour
         }
     }
 
-    public void Score()//ƒXƒRƒA‚ÌŒvZ
+    public void Score()//ã‚¹ã‚³ã‚¢ã®è¨ˆç®—
     {
         if (uiColor.Count != 0)
         {
             var topColor = uiColor.First();
-            if (uiColor.All(value => value == topColor) && uiColor.Count > 1)//‚·‚×‚Ä“¯‚¶F‚©‚Ç‚¤‚©
+            if (uiColor.All(value => value == topColor) && uiColor.Count > 1)//ã™ã¹ã¦åŒã˜è‰²ã‹ã©ã†ã‹
             {
                 audioCo.EnterAudio(uiColor.Count);
                 PlusColorCount(topColor);
@@ -164,7 +164,7 @@ public class PlayPanel : MonoBehaviour
             
             uiColor.Clear();
 
-            foreach (Image image in colorImage)//•\¦‚ğ‚·‚×‚Ä“§–¾‚É‚·‚é
+            foreach (Image image in colorImage)//è¡¨ç¤ºã‚’ã™ã¹ã¦é€æ˜ã«ã™ã‚‹
             {
                 image.color = clear;
             }

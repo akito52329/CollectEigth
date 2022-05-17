@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,8 +45,8 @@ public class ReadyPanel : MonoBehaviour
     {
         readyText.rectTransform.localScale = Vector3.zero;
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(startText.rectTransform.DOScale(Vector3.one, 1))//Šg‘å
-            .Join(startText.rectTransform.DOLocalRotate(new Vector3(0, 360, 0), 1, RotateMode.FastBeyond360))//‰ñ“]‚µ‚È‚ª‚ç
-            .OnComplete(() => { GameDirector.gameState = nextState; });//I—¹‚µ‚½‚çƒXƒe[ƒg‚ğ•Ï‚¦‚é
+        sequence.Append(startText.rectTransform.DOScale(Vector3.one, 1))//æ‹¡å¤§
+            .Join(startText.rectTransform.DOLocalRotate(new Vector3(0, 360, 0), 1, RotateMode.FastBeyond360))//å›è»¢ã—ãªãŒã‚‰
+            .OnComplete(() => { GameDirector.gameState = nextState; });//çµ‚äº†ã—ãŸã‚‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å¤‰ãˆã‚‹
     }
 }

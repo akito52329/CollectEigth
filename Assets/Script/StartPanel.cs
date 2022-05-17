@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,8 +13,8 @@ public class StartPanel : MonoBehaviour
     [SerializeField] GameObject[] buttons;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI nameText;
-    [SerializeField] int limit = 3;//ƒnƒCƒXƒRƒA‚Ì“Ç‚İ‚ŞŒÂ”
-    int _panelCount;//ƒpƒlƒ‹‚ª‰½–‡–Ú‚©‚Ç‚¤‚©
+    [SerializeField] int limit = 3;//ãƒã‚¤ã‚¹ã‚³ã‚¢ã®èª­ã¿è¾¼ã‚€å€‹æ•°
+    int _panelCount;//ãƒ‘ãƒãƒ«ãŒä½•æšç›®ã‹ã©ã†ã‹
     public int panelCount
     {
         get { return _panelCount; }
@@ -24,12 +24,12 @@ public class StartPanel : MonoBehaviour
             {
                 if (_panelCount >= 0 && _panelCount <= panels.Length - 1)
                 {
-                    panels[_panelCount].SetActive(false);//•ÏX‘O
+                    panels[_panelCount].SetActive(false);//å¤‰æ›´å‰
                     _panelCount = value;
-                    panels[_panelCount].SetActive(true);//•ÏXŒã
+                    panels[_panelCount].SetActive(true);//å¤‰æ›´å¾Œ
                 }
 
-                if (_panelCount == 0)//¶–îˆó‚ÌON/OFF
+                if (_panelCount == 0)//å·¦çŸ¢å°ã®ON/OFF
                 {
                     buttons[0].SetActive(false);
                 }
@@ -38,7 +38,7 @@ public class StartPanel : MonoBehaviour
                     buttons[0].SetActive(true);
                 }
 
-                if (_panelCount == panels.Length - 1)//‰E–îˆó‚ÌON/OFF
+                if (_panelCount == panels.Length - 1)//å³çŸ¢å°ã®ON/OFF
                 {
                     buttons[1].SetActive(false);
                 }
@@ -58,21 +58,21 @@ public class StartPanel : MonoBehaviour
     {
         NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject>("GameScore");
 
-        //ScoreƒtƒB[ƒ‹ƒh‚Ì~‡‚Åƒf[ƒ^‚ğæ“¾
+        //Scoreãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®é™é †ã§ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         query.OrderByDescending("score");
 
-        //ŒŸõŒ”‚ğİ’è
+        //æ¤œç´¢ä»¶æ•°ã‚’è¨­å®š
         query.Limit = limit;
 
-        //ƒf[ƒ^ƒXƒgƒA‚Å‚ÌŒŸõ‚ğs‚¤
+        //ãƒ‡ãƒ¼ã‚¿ã‚¹ãƒˆã‚¢ã§ã®æ¤œç´¢ã‚’è¡Œã†
         query.FindAsync((List<NCMBObject> objList, NCMBException e) =>
         {
-            if (e != null)//Ú‘±‚É¸”s
+            if (e != null)//æ¥ç¶šã«å¤±æ•—
             {
                 nameText.text = "noName";
                 scoreText.text = "0";
             }
-            else//Ú‘±‚É¬Œ÷
+            else//æ¥ç¶šã«æˆåŠŸ
             {
                 nameText.text = objList[0]["name"].ToString();
                 scoreText.text = objList[0]["score"].ToString();
@@ -87,17 +87,17 @@ public class StartPanel : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    public void OnMenu(RectTransform rectTransform)//•\¦
+    public void OnMenu(RectTransform rectTransform)//è¡¨ç¤º
     {
         rectTransform.DOScale(Vector3.one, 1f);
     }
 
-    public void OffMenu(RectTransform rectTransform)//”ñ•\¦
+    public void OffMenu(RectTransform rectTransform)//éè¡¨ç¤º
     {
         rectTransform.DOScale(Vector3.zero, 1f);
     }
 
-    public void ChengePanel(bool chenge)//ƒpƒlƒ‹‚ğ•Ï‚¦‚é
+    public void ChengePanel(bool chenge)//ãƒ‘ãƒãƒ«ã‚’å¤‰ãˆã‚‹
     {
         if(chenge)
         {

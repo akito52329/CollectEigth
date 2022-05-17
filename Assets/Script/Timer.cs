@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private Vector3 nextPosition;
     [SerializeField] BlockGenerator blockGenerator;
     [SerializeField] GameObject blockParent;
-    [SerializeField] Slider timerSlider;//ƒ^ƒCƒ}[—p‚ÌƒXƒ‰ƒCƒ_\
+    [SerializeField] Slider timerSlider;//ã‚¿ã‚¤ãƒãƒ¼ç”¨ã®ã‚¹ãƒ©ã‚¤ãƒ€â€•
     [SerializeField] private float _time = 1.0f;
     public float time
     {
@@ -25,7 +25,7 @@ public class Timer : MonoBehaviour
     }
     [SerializeField] private float timeMax = 1.0f;
     [SerializeField] private float timeMin = 0.5f;
-    [SerializeField] private int maxTimeUpCount;//Å‘å‚Ìƒ^ƒCƒ€‚ª‚O‚É‚È‚Á‚½‰ñ”
+    [SerializeField] private int maxTimeUpCount;//æœ€å¤§ã®ã‚¿ã‚¤ãƒ ãŒï¼ã«ãªã£ãŸå›æ•°
     private int _timeUpCount;
     public int timeUpCount
     {
@@ -35,9 +35,9 @@ public class Timer : MonoBehaviour
             if(_timeUpCount != value)
             {
                 _timeUpCount = value;
-                if(_timeUpCount == maxTimeUpCount && timeMax > timeMin)//ƒJƒEƒ“ƒg‚ª’B‚µ‚½‚ç
+                if(_timeUpCount == maxTimeUpCount && timeMax > timeMin)//ã‚«ã‚¦ãƒ³ãƒˆãŒé”ã—ãŸã‚‰
                 {
-                    timeMax -= timeMin;//Å‘å’l‚©‚çÅ¬’l•ª‚Ğ‚­
+                    timeMax -= timeMin;//æœ€å¤§å€¤ã‹ã‚‰æœ€å°å€¤åˆ†ã²ã
                     _timeUpCount = 0;
                 }
                 _time = timeMax;
@@ -46,7 +46,7 @@ public class Timer : MonoBehaviour
             
         }
     }
-    public bool timeCheck = false;//ƒ^ƒCƒ}[ƒXƒ^[ƒg‚·‚é‚©‚Ç‚¤‚©
+    public bool timeCheck = false;//ã‚¿ã‚¤ãƒãƒ¼ã‚¹ã‚¿ãƒ¼ãƒˆã™ã‚‹ã‹ã©ã†ã‹
 
 
     void Update()

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -17,27 +17,29 @@ public class GameDirector : MonoBehaviour
     [SerializeField] AudioController audioCo;
     [SerializeField] FinalPanel finalPanel;
     [SerializeField] PlayPanel playPanel;
+    [SerializeField] CrisisAlarm crisisAlarm;
 
-    //ƒnƒCƒXƒRƒAXV—p
+    //ãƒã‚¤ã‚¹ã‚³ã‚¢æ›´æ–°ç”¨
     [SerializeField] TMP_InputField inputField;
     [SerializeField] RectTransform rect;
     [SerializeField] int limit = 3;
 
     int one = 1;
 
-    private GameState _gameState = GameState.Ready;
+    static private GameState _gameState = GameState.Ready;
     static public GameState gameState
     {
+        get { return _gameState; }
         set
         {
-            if (director._gameState != value)
+            if (_gameState != value)
             {
-                director._gameState = value;
+                _gameState = value;
                 director.OnChangeGameState();
             }
         }
     }
-    // ƒVƒ“ƒOƒ‹ƒgƒ“—p‚ÌQÆ
+    // ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ç”¨ã®å‚ç…§
     static GameDirector director = null;
 
     private void Awake()
@@ -56,7 +58,7 @@ public class GameDirector : MonoBehaviour
         gameState = GameState.Ready;
     }
 
-    public void OnChangeGameState()//ƒQ[ƒ€‚ÌƒXƒe[ƒg•ÏX‚És‚í‚ê‚éˆ—
+    public void OnChangeGameState()//ã‚²ãƒ¼ãƒ ã®ã‚¹ãƒ†ãƒ¼ãƒˆå¤‰æ›´æ™‚ã«è¡Œã‚ã‚Œã‚‹å‡¦ç†
     {
         switch(_gameState)
         {
@@ -66,16 +68,19 @@ public class GameDirector : MonoBehaviour
                 break;
             case GameState.InGame:
                 audioCo.PlayBgm(false);
+                crisisAlarm.gameObject.SetActive(true);
                 timer.timeCheck = true;
                 player.gameObject.SetActive(true);
                 readyPanel.gameObject.SetActive(false);
                 break;
             case GameState.GameOver:
                 finalPanel.gameObject.SetActive(true);
+                crisisAlarm.gameObject.SetActive(false);
                 finalPanel.finalScore = playPanel.score;
                 finalPanel.CallDisplay();
                 playPanel.gameObject.SetActive(false);
                 audioCo.PlayBgm(true);
+                audioCo.AlarmAudio(true);
                 timer.timeCheck = false;
                 player.gameObject.SetActive(false);
                 CheckHighScore();
@@ -87,43 +92,43 @@ public class GameDirector : MonoBehaviour
     {
         NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject>("GameScore");
 
-        //ScoreƒtƒB[ƒ‹ƒh‚Ì~‡‚Åƒf[ƒ^‚ğæ“¾
+        //Scoreãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®é™é †ã§ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
         query.OrderByDescending("score");
 
-        //ŒŸõŒ”‚ğİ’è
+        //æ¤œç´¢ä»¶æ•°ã‚’è¨­å®š
         query.Limit = limit;
 
-        //ƒf[ƒ^ƒXƒgƒA‚Å‚ÌŒŸõ‚ğs‚¤
+        //ãƒ‡ãƒ¼ã‚¿ã‚¹ãƒˆã‚¢ã§ã®æ¤œç´¢ã‚’è¡Œã†
         query.FindAsync((List<NCMBObject> objList, NCMBException e) =>
         {
-            if(Convert.ToInt32(objList[0]["score"]) < finalPanel.finalScore)//ƒXƒRƒA‚ªXV‚³‚ê‚½‚ç
+            if(Convert.ToInt32(objList[0]["score"]) < finalPanel.finalScore)//ã‚¹ã‚³ã‚¢ãŒæ›´æ–°ã•ã‚ŒãŸã‚‰
             {
                 rect.DOScale(Vector3.one, one);
             }
         });
     }
 
-    public void OnHighScore(RectTransform rectTransform)//ƒnƒCƒXƒRƒA‚ğXV
+    public void OnHighScore(RectTransform rectTransform)//ãƒã‚¤ã‚¹ã‚³ã‚¢ã‚’æ›´æ–°
     {
-        // ƒNƒ‰ƒX‚ÌNCMBObject‚ğì¬
+        // ã‚¯ãƒ©ã‚¹ã®NCMBObjectã‚’ä½œæˆ
         NCMBObject nCMBObject = new NCMBObject("GameScore");
 
         nCMBObject["name"] = inputField.text;
         nCMBObject["score"] = finalPanel.finalScore;
-        // ƒf[ƒ^ƒXƒgƒA‚Ö‚Ì“o˜^
+        // ãƒ‡ãƒ¼ã‚¿ã‚¹ãƒˆã‚¢ã¸ã®ç™»éŒ²
         nCMBObject.SaveAsync();
 
         rectTransform.DOScale(Vector3.zero, one);
     }
 
-    public void ChengeScene(bool chenge)//ƒV[ƒ“Ø‚è‘Ö‚¦ƒ{ƒ^ƒ“
+    public void ChengeScene(bool chenge)//ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆãƒœã‚¿ãƒ³
     {
         audioCo.PlayAudio();
 
         StartCoroutine("LoadScene", chenge);
     }
 
-    IEnumerator LoadScene(bool chenge)//‰¹‚ğ—¬‚µ‚Ä‚©‚çƒV[ƒ“‚ğ•Ï‚¦‚é
+    IEnumerator LoadScene(bool chenge)//éŸ³ã‚’æµã—ã¦ã‹ã‚‰ã‚·ãƒ¼ãƒ³ã‚’å¤‰ãˆã‚‹
     {
         yield return new WaitForSeconds(one);
 

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +12,13 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
-        if(defaultColor !=  zeroColor)//ŠJn‚É¶¬—p‚ÉF‚ğ“n‚·
+        if(defaultColor !=  zeroColor)//é–‹å§‹æ™‚ã«ç”Ÿæˆç”¨ã«è‰²ã‚’æ¸¡ã™
         {
             blockRenderer.material.color = defaultColor;
         }
     }
 
-    public void ColorChenge(Color color)//ƒuƒƒbƒN‚ªŠÔ‚Å¶¬‚³‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
+    public void ColorChenge(Color color)//ãƒ–ãƒ­ãƒƒã‚¯ãŒæ™‚é–“ã§ç”Ÿæˆã•ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã‚‹
     {
         blockRenderer.material.color = color;
     }

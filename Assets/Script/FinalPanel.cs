@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,7 @@ public class FinalPanel : MonoBehaviour
 {
     [SerializeField] AudioController audioCo;
     [SerializeField] RectTransform rectTransform;
-    [SerializeField] string title = "ƒRƒŒƒNƒgƒGƒCƒg";
+    [SerializeField] string title = "ã‚³ãƒ¬ã‚¯ãƒˆã‚¨ã‚¤ãƒˆ";
     [SerializeField] string oneWeek = "unity1week";
     [SerializeField] float scoreTime = 10f;
     [SerializeField] float stopTime = 0.01f;
@@ -18,7 +18,7 @@ public class FinalPanel : MonoBehaviour
     public Ease Ease_Type;
     public int finalScore = 0;
     private int _score;
-    public int score//ÅIƒXƒRƒA•\¦
+    public int score//æœ€çµ‚ã‚¹ã‚³ã‚¢è¡¨ç¤º
     {
         get { return _score; }
         set
@@ -31,7 +31,7 @@ public class FinalPanel : MonoBehaviour
         }
     }
     private string[] nameColor = { "White", "Red", "Yellow", "Cyan", "Green", "Blue", "Purple", "Gray" };
-    static public Dictionary<string, int> color = new Dictionary<string, int>()//ŠeF‚ÌŒvZ‰ñ”
+    static public Dictionary<string, int> color = new Dictionary<string, int>()//å„è‰²ã®è¨ˆç®—å›æ•°
     {
         {"White", 0},
         {"Red", 0},
@@ -51,40 +51,40 @@ public class FinalPanel : MonoBehaviour
         StartCoroutine("ScoreDisplay");
     }
 
-    IEnumerator ScoreDisplay()//•\¦ƒRƒ‹[ƒ`ƒ“
+    IEnumerator ScoreDisplay()//è¡¨ç¤ºã‚³ãƒ«ãƒ¼ãƒãƒ³
     {
         var num = 0;
-        rectTransform.DOScale(Vector3.one, upTime);//ƒpƒlƒ‹‚ğŠg‘å‚³‚¹‚é
+        rectTransform.DOScale(Vector3.one, upTime);//ãƒ‘ãƒãƒ«ã‚’æ‹¡å¤§ã•ã›ã‚‹
         yield return new WaitForSeconds(upTime);
 
         audioCo.FinishAudio();
 
         yield return new WaitForSeconds(stopTime);
 
-        //ÅIƒXƒRƒA•\¦
+        //æœ€çµ‚ã‚¹ã‚³ã‚¢è¡¨ç¤º
         DOTween.To(() => score, num => score = num, finalScore, scoreTime).SetEase(Ease_Type);
 
         foreach (Text text in countText)
         {
             text.gameObject.SetActive(true);
             audioCo.DisplayAudio();
-            text.text = ":" + color[nameColor[num]].ToString() + "‰ñ";
+            text.text = ":" + color[nameColor[num]].ToString() + "å›";
             num++;
 
             yield return new WaitForSeconds(upTime);
         }
     }
 
-    public void OnTwitterButton()//Twitter‚É“Šeˆ—
+    public void OnTwitterButton()//Twitterã«æŠ•ç¨¿å‡¦ç†
     {
-        //url‚Ìì¬
-        string text = $"ƒXƒRƒA‚Íw{finalScore}x‚Å‚µ‚½BŠF‚³‚ñ‚à—V‚ñ‚Å‚İ‚Ä‚ËI@\nhttps://unityroom.com/games/colorcollect2566//";     
+        //urlã®ä½œæˆ
+        string text = $"ã‚¹ã‚³ã‚¢ã¯ã€{finalScore}ã€ã§ã—ãŸã€‚çš†ã•ã‚“ã‚‚éŠã‚“ã§ã¿ã¦ã­ï¼ã€€\nhttps://unityroom.com/games/colorcollect2566//";     
         string esctext = UnityWebRequest.EscapeURL(text);
         string esctag1 = UnityWebRequest.EscapeURL(title);
         string esctag2 = UnityWebRequest.EscapeURL(oneWeek);
         string url = "https://twitter.com/intent/tweet?text=" + esctext + "&hashtags=" + esctag1 + "&hashtags=" + esctag2 ;
 
-        //Twitter“Še‰æ–Ê‚Ì‹N“®
+        //TwitteræŠ•ç¨¿ç”»é¢ã®èµ·å‹•
         Application.OpenURL(url);
     }
 }

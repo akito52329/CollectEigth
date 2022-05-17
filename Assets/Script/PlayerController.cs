@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +12,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // ƒXƒNƒŠ[ƒ“ˆÊ’u‚©‚ç3DƒIƒuƒWƒFƒNƒg‚É‘Î‚µ‚ÄRayiŒõüj‚ğ”­Ë
+                // ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ä½ç½®ã‹ã‚‰3Dã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¯¾ã—ã¦Rayï¼ˆå…‰ç·šï¼‰ã‚’ç™ºå°„
                 Ray rayOrigine = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                // Ray‚ªƒIƒuƒWƒFƒNƒg‚Éƒqƒbƒg‚µ‚½ê‡
+                // RayãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ãƒ’ãƒƒãƒˆã—ãŸå ´åˆ
                 if (Physics.Raycast(rayOrigine, out RaycastHit hitInfo))
                 {
-                    // ƒ^ƒO‚ªBlock‚¾‚Á‚½‚ç
+                    // ã‚¿ã‚°ãŒBlockã ã£ãŸã‚‰
                     if (hitInfo.collider.CompareTag("Block"))
                     {                        
                         OnClick(hitInfo.collider.GetComponent<MeshRenderer>().material.color , Input.mousePosition);

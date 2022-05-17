@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +12,9 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioSource displayAudio;
     [SerializeField] AudioSource closeAudio;
     [SerializeField] AudioSource finishAudio;
+    [SerializeField] AudioSource alarmAudio;
 
-    public void PlayBgm(bool on)//BGM‚ÌON/OFF
+    public void PlayBgm(bool on)//BGMã®ON/OFF
     {
         if(!on)
         {
@@ -24,27 +25,43 @@ public class AudioController : MonoBehaviour
             bgm.Stop();
         }
     }
-    public void FinishAudio()//I—¹‚µ‚½‚Æ‚«‚É‚È‚éSE
+
+    public void AlarmAudio(bool on)//ã‚¢ãƒ©ãƒ¼ãƒ ã®ON/OFF
+    {
+        if (!on)
+        {
+            if (!alarmAudio.isPlaying)//éŸ³ãŒãªã£ã¦ã„ãªã‹ã£ãŸã‚‰
+            {
+                alarmAudio.PlayOneShot(alarmAudio.clip);
+            }
+        }
+        else
+        {
+            alarmAudio.Stop();
+        }
+    }
+
+    public void FinishAudio()//çµ‚äº†ã—ãŸã¨ãã«ãªã‚‹SE
     {
         finishAudio.Play();
     }
 
-    public void DisplayAudio()//•\¦‚³‚ê‚½‚Æ‚«‚É‚È‚éSE
+    public void DisplayAudio()//è¡¨ç¤ºã•ã‚ŒãŸã¨ãã«ãªã‚‹SE
     {
         displayAudio.Play();
     }
 
-    public void PlayAudio()//Playƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚ÌSE
+    public void PlayAudio()//Playãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã¨ãã®SE
     {
         playAudio.Play();
     }
 
-    public void StartAudio()//ƒXƒ^[ƒg‚É‚È‚éSE
+    public void StartAudio()//ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ã«ãªã‚‹SE
     {
         startAudio.Play();
     }
 
-    public void ClickAudio()//ƒuƒƒbƒN‚ğ‰Ÿ‚µ‚½‚Æ‚«‚É‚È‚éSE
+    public void ClickAudio()//ãƒ–ãƒ­ãƒƒã‚¯ã‚’æŠ¼ã—ãŸã¨ãã«ãªã‚‹SE
     {
         getAudio.Play();
     }
@@ -54,7 +71,7 @@ public class AudioController : MonoBehaviour
         closeAudio.Play();
     }
     
-    public void EnterAudio(int count = 0, bool check = true)//Enter‰Ÿ‚µ‚½‚ÌSE
+    public void EnterAudio(int count = 0, bool check = true)//EnteræŠ¼ã—ãŸæ™‚ã®SE
     {
         if (check)
         {
