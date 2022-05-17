@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 using System.Linq;
 
 public class PlayPanel : MonoBehaviour
 {
     [SerializeField] AudioController audioCo;
+    [SerializeField] GameObject imagePatent;//
+    [SerializeField] GameObject effImage;//クリック時のエフェクトの画像
     [SerializeField] int defaultScore = 10;
+    [SerializeField] float speed = 0.15f;
     int zero = 0;
     int ten = 10;
     [SerializeField] int maxCount = 5;
@@ -65,11 +69,21 @@ public class PlayPanel : MonoBehaviour
         }
     }
 
-    public void GetColor(Color color)
+    public void GetColor(Color color, Vector3 start)
     {
+        maxClick = true;
+        Vector3[] curvers = new Vector3[2];
+        curvers[0] = start;//クリック位置
+        curvers[1] = colorImage[count].transform.localPosition;//結果表示の位置
+       
+        GameObject eff = Instantiate(effImage, start, effImage.transform.rotation, imagePatent.transform); //エフェクトのオブジェクトを生成
+        eff.GetComponent<Image>().color = color;//色を変える
+        eff.transform.DOLocalPath(curvers, speed, PathType.Linear ,PathMode.Sidescroller2D)//放物線で移動させる
+            .OnComplete(() => { colorImage[count].color = color; count++; Destroy(eff); maxClick = false; }).SetEase(Ease.OutSine);
+
         uiColor.Add(color);//回収した色を追加する
-        colorImage[count].color = color;
-        count++;
+
+        
     }
 
     private void PlusColorCount(Color getColor)//そろえた回数を与える

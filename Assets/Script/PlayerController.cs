@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
                     // ƒ^ƒO‚ªBlock‚¾‚Á‚½‚ç
                     if (hitInfo.collider.CompareTag("Block"))
                     {                        
-                        OnClick(hitInfo.collider.GetComponent<MeshRenderer>().material.color);
+                        OnClick(hitInfo.collider.GetComponent<MeshRenderer>().material.color , Input.mousePosition);
                         Destroy(hitInfo.collider.gameObject);
                     }
                 }
@@ -30,9 +30,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnClick(Color color)
+    private void OnClick(Color color , Vector3 clickPos)
     {
         audioCo.ClickAudio();
-        playPanel.GetColor(color);
+        playPanel.GetColor(color, clickPos);
     }
 }
