@@ -9,14 +9,17 @@ using System.Linq;
 public class PlayPanel : MonoBehaviour
 {
     [SerializeField] AudioController audioCo;
-    [SerializeField] GameObject imagePatent;//
+    [SerializeField] Camera mineCamera;
+    [SerializeField] GameObject imagePatent;//生成した画像の親
     [SerializeField] GameObject effImage;//クリック時のエフェクトの画像
+    [SerializeField] Vector3 rotateZ = new Vector3(0, 0, 360);//Z回転
     [SerializeField] int defaultScore = 10;
-    [SerializeField] float speed = 0.15f;
-    int zero = 0;
-    int ten = 10;
+    [SerializeField] float speed = 0.15f;//変移時間
+    [SerializeField] float requiredTime = 0.5f;//変移時間
     [SerializeField] int maxCount = 5;
     [SerializeField] int[] magniCriteria;//倍率基準
+    int zero = 0;
+    int ten = 10;
     private int _count;
     public int count//ブロックが何個あるか
     {
@@ -54,8 +57,6 @@ public class PlayPanel : MonoBehaviour
 
     [SerializeField] List<Image> colorImage;
     [SerializeField] List<Color> uiColor;
-    [SerializeField] List<int> colorKind;
-    private Color clear = Color.clear;
 
 
     void Update()
@@ -82,8 +83,6 @@ public class PlayPanel : MonoBehaviour
             .OnComplete(() => { colorImage[count].color = color; count++; Destroy(eff); maxClick = false; }).SetEase(Ease.OutSine);
 
         uiColor.Add(color);//回収した色を追加する
-
-        
     }
 
     private void PlusColorCount(Color getColor)//そろえた回数を与える
@@ -154,19 +153,25 @@ public class PlayPanel : MonoBehaviour
             {
                 audioCo.EnterAudio(uiColor.Count);
                 PlusColorCount(topColor);
-                score += defaultScore * uiColor.Count() * Magnification(uiColor.Count);
+                score += defaultScore * uiColor.Count() * Magnification(uiColor.Count);//スコアの計算
+                mineCamera.backgroundColor = topColor;//背景画像の色を変える
             }
             else
             {
+                mineCamera.backgroundColor = Color.black;
                 audioCo.EnterAudio(zero ,false);
-                score -= ten;
+                score -= ten;//スコアをマイナス
             }
             
             uiColor.Clear();
 
             foreach (Image image in colorImage)//表示をすべて透明にする
             {
-                image.color = clear;
+                DOTween.ToAlpha(() => image.color, color => image.color = color, zero, requiredTime);//透明度
+                image.rectTransform.DOLocalRotate(rotateZ, requiredTime, RotateMode.FastBeyond360);//回転
+
+
+                //image.color = Color.clear;
             }
 
             count = zero;

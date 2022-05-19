@@ -37,7 +37,7 @@ public class CrisisAlarm : MonoBehaviour
                    color => vigilance.color = color,
                    maxClear, // 目標値
                    1f // 所要時間
-               ).SetLoops(-1, LoopType.Yoyo);
+               ).SetLoops(1, LoopType.Yoyo);
         }
         else
         {

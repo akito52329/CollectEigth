@@ -11,6 +11,7 @@ public class ReadyPanel : MonoBehaviour
     [SerializeField] GameDirector.GameState nextState;
     [SerializeField] TextMeshProUGUI readyText;
     [SerializeField] TextMeshProUGUI startText;
+    [SerializeField] Vector3 rotateY = new Vector3(0, 360, 0);//Z回転
 
     private bool _chenge; 
     public bool chenge
@@ -46,7 +47,7 @@ public class ReadyPanel : MonoBehaviour
         readyText.rectTransform.localScale = Vector3.zero;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(startText.rectTransform.DOScale(Vector3.one, 1))//拡大
-            .Join(startText.rectTransform.DOLocalRotate(new Vector3(0, 360, 0), 1, RotateMode.FastBeyond360))//回転しながら
+            .Join(startText.rectTransform.DOLocalRotate(rotateY, 1, RotateMode.FastBeyond360))//回転しながら
             .OnComplete(() => { GameDirector.gameState = nextState; });//終了したらステートを変える
     }
 }
