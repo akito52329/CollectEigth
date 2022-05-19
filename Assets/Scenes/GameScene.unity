@@ -1930,7 +1930,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 398265556}
   m_HandleRect: {fileID: 0}
@@ -2713,8 +2713,8 @@ MonoBehaviour:
   effImage: {fileID: 751955850064587778, guid: 559b58e90b1160e419f51bb06bafa00d, type: 3}
   rotateZ: {x: 0, y: 0, z: 360}
   defaultScore: 1
-  speed: 0.15
-  requiredTime: 0.25
+  speed: 0.2
+  requiredTime: 0.2
   maxCount: 5
   magniCriteria: 0100000002000000050000000a000000
   scoreText: {fileID: 1569307872}
@@ -3967,7 +3967,7 @@ MonoBehaviour:
   vigilance: {fileID: 603794005}
   maxClear: 0.35
   alarmName: Block
-  defColor: {r: 1, g: 0, b: 0, a: 0}
+  defColor: {r: 1, g: 0.37169808, b: 0.37169808, a: 0}
 --- !u!1 &626043635
 GameObject:
   m_ObjectHideFlags: 0

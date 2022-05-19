@@ -167,11 +167,8 @@ public class PlayPanel : MonoBehaviour
 
             foreach (Image image in colorImage)//表示をすべて透明にする
             {
-                DOTween.ToAlpha(() => image.color, color => image.color = color, zero, requiredTime);//透明度
                 image.rectTransform.DOLocalRotate(rotateZ, requiredTime, RotateMode.FastBeyond360);//回転
-
-
-                //image.color = Color.clear;
+                DOTween.ToAlpha(() => image.color, color => image.color = color, zero, requiredTime);//透明度
             }
 
             count = zero;
